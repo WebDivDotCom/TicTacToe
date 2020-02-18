@@ -1,14 +1,36 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import Box from "./Box";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import Box from './Box';
 
 export default class Gameboard extends Component {
-  boxes = new Array(9).fill("");
+  state = {
+    nextMove: 'X',
+    boxes: Array(9).fill(' ')
+  };
+
+  changePlayer = nextMove => {
+    this.setState({ nextMove: nextMove === 'X' ? 'O' : 'X' });
+    return nextMove;
+  };
+
   render() {
     return (
       <Board data-testid="gameboard">
-        {this.boxes.map(b => (
-          <Box />
+        {this.state.boxes.map((b, i) => (
+          <Box key={i}>
+            {{
+              value: b,
+              handleClick: () => {
+                const tempA = [...this.state.boxes];
+                tempA[i] =
+                  tempA[i] === ' '
+                    ? this.changePlayer(this.state.nextMove)
+                    : tempA[i];
+
+                this.setState({ boxes: tempA });
+              }
+            }}
+          </Box>
         ))}
       </Board>
     );
