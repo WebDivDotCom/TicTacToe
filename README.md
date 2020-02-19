@@ -1,5 +1,5 @@
 # Tic Tac Toe
 
-Start DEV-env: yarn start
+Start DEV-env: 'yarn start'
 
-Start Cypress test: yarn cypress:open
+Start Cypress test: 'yarn cypress:open'
