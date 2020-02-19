@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 export default props => {
   const { value, handleClick } = props.children;
@@ -11,8 +11,12 @@ export default props => {
   );
 };
 
+// STYLED COMPONENTS
+
 const Box = styled.button`
   flex-basis: 33%;
+  height: 200px;
+  margin: 2px 2px 0 0;
   border: 1px dashed #000; // black;
   font-size: 100px;
   font-weight: bold;
