@@ -38,4 +38,13 @@ describe("Building and playing the game", () => {
 
     cy.get('[data-testid="winner"]').should("have.text", "X");
   });
+
+  it("plays the game and tie", () => {
+    cy.reload();
+    cy.get('[data-testid="gameboard"] :nth-child(7)').click();
+    cy.get('[data-testid="gameboard"] > button').each((b, i) => {
+      b.click();
+    });
+    cy.get('[data-testid="winner"]').should("have.text", "It's a draw");
+  });
 });

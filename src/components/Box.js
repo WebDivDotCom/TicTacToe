@@ -17,10 +17,10 @@ const Box = styled.button`
   flex-basis: 33%;
   height: 200px;
   margin: 2px 2px 0 0;
-  border: 1px dashed #000; // black;
+  border: 1px dashed #000; /* black */
   font-size: 100px;
   font-weight: bold;
   &:focus {
-    outline: 0;
+    outline: 0; /* prevents the default outline when clicking a button */
   }
 `;

@@ -1,4 +1,5 @@
 # Tic Tac Toe
 
-Start DEV-env: yarn start
-Start Cypress test: yarn cypress:open
+**Installing the package:** yarn install
+**Start DEV-env:** yarn start
+**Start Cypress end-to-end test:** yarn cypress:open

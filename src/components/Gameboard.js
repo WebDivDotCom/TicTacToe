@@ -3,12 +3,16 @@ import styled from "styled-components";
 import Box from "./Box";
 
 export default class Gameboard extends Component {
+  // REACT STATE
+
   state = {
+    // REQ: X always goes first
     nextMove: "X",
     boxes: Array(9).fill(" "),
     winner: null
   };
 
+  // HELPER FUNCTIONS
   changePlayer = nextMove => {
     this.setState({ nextMove: nextMove === "X" ? "O" : "X" });
     return nextMove;
@@ -28,6 +32,7 @@ export default class Gameboard extends Component {
       [2, 4, 6]
     ];
 
+    // REQ: If a player is able to draw three X’s or three O’s in a row, that player wins
     winners.forEach(win => {
       if (
         boxes[win[0]] !== " " &&
@@ -35,13 +40,16 @@ export default class Gameboard extends Component {
         boxes[win[0]] === boxes[win[2]]
       ) {
         winner = boxes[win[0]];
-        this.setState({ winner: winner });
       }
     });
-    return winner;
+
+    if (winner !== null) this.setState({ winner: winner });
+    // REQ: If all nine squares are filled and neither player has three in a row, the game is a draw
+    else if (!boxes.includes(" ")) this.setState({ winner: "It's a draw" });
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  // REACT LIFECYCLE METHODS
+  componentDidUpdate() {
     if (this.state.winner === null) this.getWinner(); // Do not check for winner if there's one to prevent infinite loop
   }
 
@@ -54,14 +62,21 @@ export default class Gameboard extends Component {
               {{
                 value: b,
                 handleClick: () => {
+                  // Do not handle the Box-click when there is a winner
                   if (this.state.winner === null) {
                     const tempA = [...this.state.boxes]; // shallow copy array
+                    {
+                      /* 
+                      REQ: Players alternate placing X’s and O’s on the board
+                      REQ: Players cannot play on a played position 
+                      */
+                    }
                     tempA[i] =
                       tempA[i] === " "
                         ? this.changePlayer(this.state.nextMove)
                         : tempA[i];
 
-                    this.setState({ boxes: tempA }); // use shallow copy to update state-array
+                    this.setState({ boxes: tempA }); // use a shallow copy to update state-array
                   }
                 }
               }}
